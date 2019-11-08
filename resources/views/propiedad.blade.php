@@ -1,4 +1,4 @@
-@extends('dato.propiedad')
+@extends('layouts.master')
 {{-- el "." equivale a "/" --}}
 
 @section('content')
@@ -93,7 +93,7 @@
             <a class="nav-link" href="{{ route('inicio') }}">Inicio</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="about.html">Acerca de</a>
+            <a class="nav-link" href="{{ route('acerca') }}">Acerca de</a>
           </li>
           <li class="nav-item">
             <a class="nav-link active" href="{{ route('propiedad') }}">Propiedades</a>
@@ -102,10 +102,10 @@
             <a class="nav-link" href="blog-grid.html">Blog</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="contact.html">Contacto</a>
+            <a class="nav-link" href="{{ route('contacto') }}">Contacto</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{{ route('dato.index') }}">CRUD</a>
+            <a class="nav-link" href="{{ route('propiedad.index') }}">CRUD</a>
           </li>
         </ul>
       </div>
@@ -113,6 +113,38 @@
         data-target="#navbarTogglerDemo01" aria-expanded="false">
         <span class="fa fa-search" aria-hidden="true"></span>
       </button>
+      <!-- Right Side Of Navbar -->
+    <ul class="navbar-nav ml-auto">
+                        <!-- Authentication Links -->
+                        @guest
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('login') }}">{{ __('Iniciar sesiòn') }}</a>
+                            </li>
+                            @if (Route::has('register'))
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Registrar') }}</a>
+                                </li>
+                            @endif
+                        @else
+                            <li class="nav-item dropdown">
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    {{ Auth::user()->name }} <span class="caret"></span>
+                                </a>
+
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ route('inicio') }}"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                        {{ __('Cerrar Sesiòn') }}
+                                    </a>
+
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                        @csrf
+                                    </form>
+                                </div>
+                            </li>
+                        @endguest
+                    </ul>
     </div>
   </nav>
   <!--/ Nav End /-->
@@ -905,11 +937,11 @@
         <div class="col-sm-12 col-md-4">
           <div class="widget-a">
             <div class="w-header-a">
-              <h3 class="w-title-a text-brand">EstateAgency</h3>
+              <h3 class="w-title-a text-brand">HouseRent</h3>
             </div>
             <div class="w-body-a">
               <p class="w-text-a color-text-a">
-                Una pagina donde puedes encontrar tu alojamiento cercas de las intalaciones del centro universitario.
+                Una pagina donde puedes encontrar tu alojamiento en las zonas de guadalajara, tonala, zapopan y tlaquepaque.
               </p>
             </div>
             <div class="w-footer-a">
@@ -1006,7 +1038,7 @@
           <div class="copyright-footer">
             <p class="copyright color-text-a">
               &copy; Copyright
-              <span class="color-a">EstateAgency</span> Todos los derechos reservados.
+              <span class="color-a">HouseRent</span> Todos los derechos reservados.
             </p>
           </div>
           <div class="credits">
@@ -1016,7 +1048,7 @@
               Licensing information: https://bootstrapmade.com/license/
               Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/buy/?theme=EstateAgency
             -->
-            Diseñado por EstateAgency</a>
+            Diseñado por HouseRent</a>
           </div>
         </div>
       </div>

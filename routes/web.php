@@ -15,8 +15,15 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/propiedad', 'DatoController@propiedad')->name('propiedad');
-Route::get('/inicio', 'DatoController@inicio')->name('inicio');
+Auth::routes(['verify' => true]);
 
+Route::get('/home', 'HomeController@index')->name('home');
 
-Route::resource('dato', 'DatoController');
+Route::get('/propiedades', 'PropiedadController@propiedad')->name('propiedad');
+Route::get('/inicio', 'PropiedadController@inicio')->name('inicio');
+Route::get('/inicioo', 'PropiedadController@inicioo')->name('inicioo');
+Route::get('/acerca', 'PropiedadController@acerca')->name('acerca');
+Route::get('/blog', 'PropiedadController@blog')->name('blog');
+Route::get('/contacto', 'PropiedadController@contacto')->name('contacto');
+
+Route::resource('propiedad', 'PropiedadController');
